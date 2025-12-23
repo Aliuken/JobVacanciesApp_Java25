@@ -24,11 +24,11 @@ public class ConcurrencyUtils {
 
 	public static <E> List<ChunkResultDTO<List<E>,Void>> splitAndRunChunksInParallel(final Collection<E> initialElements, final int chunkSize,
 													   final int numberOfThreads, final Consumer<List<E>> chunkConsumer) {
-		if (initialElements == null || initialElements.isEmpty()) {
+		if(initialElements == null || initialElements.isEmpty()) {
 			return List.of();
 		}
 
-		if (numberOfThreads <= 0) {
+		if(numberOfThreads <= 0) {
 			throw new IllegalArgumentException("The numberOfThreads must be greater than 0");
 		}
 
@@ -40,15 +40,15 @@ public class ConcurrencyUtils {
 
 	public static <E,R> List<ChunkResultDTO<List<E>,R>> splitAndRunChunksInParallel(final Collection<E> initialElements, final int chunkSize,
 														 final int numberOfThreads, final Function<List<E>,R> chunkFunction) {
-		if (initialElements == null || initialElements.isEmpty()) {
+		if(initialElements == null || initialElements.isEmpty()) {
 			return List.of();
 		}
 
-		if (numberOfThreads <= 0) {
+		if(numberOfThreads <= 0) {
 			throw new IllegalArgumentException("The numberOfThreads must be greater than 0");
 		}
 
-		if (chunkFunction == null) {
+		if(chunkFunction == null) {
 			throw new IllegalArgumentException("The chunkFunction must not be null");
 		}
 
@@ -65,11 +65,11 @@ public class ConcurrencyUtils {
 
 	public static <E> List<ChunkResultDTO<List<E>,Void>> splitAndRunChunksInParallelWithVirtualThreads(final Collection<E> initialElements, final int chunkSize,
 																		 final int numberOfVirtualThreads, final Consumer<List<E>> chunkConsumer) {
-		if (initialElements == null || initialElements.isEmpty()) {
+		if(initialElements == null || initialElements.isEmpty()) {
 			return List.of();
 		}
 
-		if (numberOfVirtualThreads <= 0) {
+		if(numberOfVirtualThreads <= 0) {
 			throw new IllegalArgumentException("The numberOfVirtualThreads must be greater than 0");
 		}
 
@@ -81,15 +81,15 @@ public class ConcurrencyUtils {
 
 	public static <E,R> List<ChunkResultDTO<List<E>,R>> splitAndRunChunksInParallelWithVirtualThreads(final Collection<E> initialElements, final int chunkSize,
 																		   final int numberOfVirtualThreads, final Function<List<E>,R> chunkFunction) {
-		if (initialElements == null || initialElements.isEmpty()) {
+		if(initialElements == null || initialElements.isEmpty()) {
 			return List.of();
 		}
 
-		if (numberOfVirtualThreads <= 0) {
+		if(numberOfVirtualThreads <= 0) {
 			throw new IllegalArgumentException("The numberOfVirtualThreads must be greater than 0");
 		}
 
-		if (chunkFunction == null) {
+		if(chunkFunction == null) {
 			throw new IllegalArgumentException("The chunkFunction must not be null");
 		}
 
@@ -106,7 +106,7 @@ public class ConcurrencyUtils {
 
 	public static <E> List<ChunkResultDTO<List<E>,Void>> splitAndRunChunksInParallelWithVirtualThreads(final Collection<E> initialElements, final int chunkSize,
 																		 final Consumer<List<E>> chunkConsumer) {
-		if (initialElements == null || initialElements.isEmpty()) {
+		if(initialElements == null || initialElements.isEmpty()) {
 			return List.of();
 		}
 
@@ -118,11 +118,11 @@ public class ConcurrencyUtils {
 
 	public static <E,R> List<ChunkResultDTO<List<E>,R>> splitAndRunChunksInParallelWithVirtualThreads(final Collection<E> initialElements, final int chunkSize,
 																		   final Function<List<E>,R> chunkFunction) {
-		if (initialElements == null || initialElements.isEmpty()) {
+		if(initialElements == null || initialElements.isEmpty()) {
 			return List.of();
 		}
 
-		if (chunkFunction == null) {
+		if(chunkFunction == null) {
 			throw new IllegalArgumentException("The chunkFunction must not be null");
 		}
 
@@ -139,22 +139,22 @@ public class ConcurrencyUtils {
 
 	//Create a chunkList from the initialElements with chunkSize as the maximum chuck size
 	private static <E> List<List<E>> createChunkList(final Collection<E> initialElements, final int chunkSize) {
-		if (chunkSize <= 0) {
+		if(chunkSize <= 0) {
 			throw new IllegalArgumentException("The chunkSize must be greater than 0");
 		}
 
 		final List<List<E>> chunkList = new ArrayList<>();
 		List<E> chunk = new ArrayList<>(chunkSize);
 
-		for (final E element : initialElements) {
+		for(final E element : initialElements) {
 			chunk.add(element);
-			if (chunk.size() == chunkSize) {
+			if(chunk.size() == chunkSize) {
 				chunkList.add(chunk);
 				chunk = new ArrayList<>(chunkSize);
 			}
 		}
 
-		if (!chunk.isEmpty()) {
+		if(!chunk.isEmpty()) {
 			chunkList.add(chunk);
 		}
 
@@ -164,9 +164,9 @@ public class ConcurrencyUtils {
 	//Execute the chunkTask for every chunk in the chunkList (with the given numberOfThreads)
 	private static <E,R> List<ChunkResultDTO<List<E>,R>> runChunksInParallel(final List<List<E>> chunkList, final int numberOfThreads,
 													 final Function<List<E>,R> chunkTask) {
-		try (final ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads)) {
+		try(final ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads)) {
 			final List<ChunkFutureDTO<List<E>,R>> chunkFutureDTOList = new ArrayList<>(chunkList.size());
-			for (final List<E> chunk : chunkList) {
+			for(final List<E> chunk : chunkList) {
 				final Callable<R> callable = () -> chunkTask.apply(chunk);
 				final Future<R> future = executorService.submit(callable);
 				final ChunkFutureDTO chunkFutureDTO = new ChunkFutureDTO(chunk, future);
@@ -180,10 +180,10 @@ public class ConcurrencyUtils {
 	//Execute the chunkTask for every chunk in the chunkList (with the given numberOfVirtualThreads)
 	private static <E,R> List<ChunkResultDTO<List<E>,R>> runChunksInParallelWithVirtualThreads(final List<List<E>> chunkList, final int numberOfVirtualThreads,
 																	   final Function<List<E>,R> chunkTask) {
-		try (final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
+		try(final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
 			final Semaphore semaphore = new Semaphore(numberOfVirtualThreads);
 			final List<ChunkFutureDTO<List<E>,R>> chunkFutureDTOList = new ArrayList<>(chunkList.size());
-			for (final List<E> chunk : chunkList) {
+			for(final List<E> chunk : chunkList) {
 				final Callable<R> callable = () -> {
 					try {
 						semaphore.acquire();
@@ -207,9 +207,9 @@ public class ConcurrencyUtils {
 	//Execute the chunkTask for every chunk in the chunkList (with one virtual thread per task)
 	private static <E,R> List<ChunkResultDTO<List<E>,R>> runChunksInParallelWithVirtualThreads(final List<List<E>> chunkList,
 																	   final Function<List<E>,R> chunkTask) {
-		try (final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
+		try(final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
 			final List<ChunkFutureDTO<List<E>,R>> chunkFutureDTOList = new ArrayList<>(chunkList.size());
-			for (final List<E> chunk : chunkList) {
+			for(final List<E> chunk : chunkList) {
 				final Callable<R> callable = () -> chunkTask.apply(chunk);
 				final Future<R> future = executorService.submit(callable);
 				final ChunkFutureDTO chunkFutureDTO = new ChunkFutureDTO(chunk, future);
@@ -222,7 +222,7 @@ public class ConcurrencyUtils {
 
 	private static <E,R> List<ChunkResultDTO<List<E>,R>> runFutures(final List<ChunkFutureDTO<List<E>,R>> chunkFutureDTOList) {
 		final List<ChunkResultDTO<List<E>,R>> chunkResultDTOList;
-		if (log.isDebugEnabled()) {
+		if(log.isDebugEnabled()) {
 			chunkResultDTOList = ConcurrencyUtils.runFuturesWithLogging(chunkFutureDTOList);
 		} else {
 			chunkResultDTOList = ConcurrencyUtils.runFuturesWithoutLogging(chunkFutureDTOList);
