@@ -163,7 +163,7 @@ public class ConcurrencyUtils {
 
 	//Execute the chunkTask for every chunk in the chunkList (with the given numberOfThreads)
 	private static <E,R> List<ChunkResultDTO<List<E>,R>> runChunksInParallel(final List<List<E>> chunkList, final int numberOfThreads,
-													 final Function<List<E>,R> chunkTask) {
+																			 final Function<List<E>,R> chunkTask) {
 		try(final ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads)) {
 			final List<ChunkFutureDTO<List<E>,R>> chunkFutureDTOList = new ArrayList<>(chunkList.size());
 			for(final List<E> chunk : chunkList) {
@@ -179,7 +179,7 @@ public class ConcurrencyUtils {
 
 	//Execute the chunkTask for every chunk in the chunkList (with the given numberOfVirtualThreads)
 	private static <E,R> List<ChunkResultDTO<List<E>,R>> runChunksInParallelWithVirtualThreads(final List<List<E>> chunkList, final int numberOfVirtualThreads,
-																	   final Function<List<E>,R> chunkTask) {
+																							   final Function<List<E>,R> chunkTask) {
 		try(final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
 			final Semaphore semaphore = new Semaphore(numberOfVirtualThreads);
 			final List<ChunkFutureDTO<List<E>,R>> chunkFutureDTOList = new ArrayList<>(chunkList.size());
@@ -206,7 +206,7 @@ public class ConcurrencyUtils {
 
 	//Execute the chunkTask for every chunk in the chunkList (with one virtual thread per task)
 	private static <E,R> List<ChunkResultDTO<List<E>,R>> runChunksInParallelWithVirtualThreads(final List<List<E>> chunkList,
-																	   final Function<List<E>,R> chunkTask) {
+																							   final Function<List<E>,R> chunkTask) {
 		try(final ExecutorService executorService = Executors.newVirtualThreadPerTaskExecutor()) {
 			final List<ChunkFutureDTO<List<E>,R>> chunkFutureDTOList = new ArrayList<>(chunkList.size());
 			for(final List<E> chunk : chunkList) {
