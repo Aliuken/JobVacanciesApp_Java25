@@ -351,7 +351,7 @@ public class JobCategoryRepositoryTest {
 		Assertions.assertEquals(name, jobCategoryDTO.name());
 		Assertions.assertEquals("Habilidades para diseñar, dirigir y construir proyectos arquitectónicos, que pueden ir desde diseños en pequeña escala (como casas), hasta gran escala (como el planeamiento de una ciudad).", jobCategoryDTO.description());
 
-		final Set<Long> jobVacancyIds = jobCategoryDTO.jobVacancyIds();
+		final SequencedSet<Long> jobVacancyIds = jobCategoryDTO.jobVacancyIds();
 		Assertions.assertNotNull(jobVacancyIds);
 		Assertions.assertEquals(6, jobVacancyIds.size());
 

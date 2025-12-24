@@ -39,7 +39,6 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Objects;
 import java.util.SequencedSet;
-import java.util.Set;
 
 @Controller
 @Slf4j
@@ -235,7 +234,7 @@ public class JobCategoryController extends AbstractEntityControllerWithoutPredef
 
 			final String name = jobCategoryDTO.name();
 			final String description = jobCategoryDTO.description();
-			final Set<Long> jobVacancyIds = jobCategoryDTO.jobVacancyIds();
+			final SequencedSet<Long> jobVacancyIds = jobCategoryDTO.jobVacancyIds();
 
 			JobCategory jobCategory = jobCategoryService.findByIdOrNewEntity(id);
 			jobCategory.setName(name);

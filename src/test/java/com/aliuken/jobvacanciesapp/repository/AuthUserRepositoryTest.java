@@ -879,7 +879,7 @@ public class AuthUserRepositoryTest {
 		Assertions.assertEquals(TablePageSize.BY_DEFAULT.getValue(), authUserDTO.initialTablePageSizeValue());
 		Assertions.assertEquals(PdfDocumentPageFormat.A3_HORIZONTAL.getCode(), authUserDTO.pdfDocumentPageFormatCode());
 
-		final Set<String> authRoleNames = authUserDTO.authRoleNames();
+		final SequencedSet<String> authRoleNames = authUserDTO.authRoleNames();
 		Assertions.assertNotNull(authRoleNames);
 		Assertions.assertEquals(2, authRoleNames.size());
 
