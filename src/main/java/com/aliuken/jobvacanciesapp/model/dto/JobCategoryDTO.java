@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.SequencedSet;
-import java.util.Set;
 
 public record JobCategoryDTO(
 	Long id,

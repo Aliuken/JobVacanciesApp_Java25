@@ -12,7 +12,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.SequencedSet;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class SpringSecurityUtils {
