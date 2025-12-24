@@ -10,6 +10,7 @@ import java.util.EnumSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -115,17 +116,17 @@ public class ParallelStreamUtils extends StreamUtils {
 	}
 
 	@Override
-	public <T> Set<T> joinSets(final Set<T> set1, final Set<T> set2) {
+	public <T> SequencedSet<T> joinSets(final Set<T> set1, final Set<T> set2) {
 		final Object[] objectArray = new Object[]{set1, set2};
 		final Set<T>[] sets = GenericsUtils.cast(objectArray);
 
-		final Set<T> elementSet = this.joinSets(sets);
+		final SequencedSet<T> elementSet = this.joinSets(sets);
 
 		return elementSet;
 	}
 
 	@Override
-	public <T> Set<T> joinSets(final Set<T>[] sets) {
+	public <T> SequencedSet<T> joinSets(final Set<T>[] sets) {
 		Stream<Set<T>> setStream = Stream.empty();
 		setStream = setStream.parallel();
 		if(sets != null) {
@@ -136,7 +137,7 @@ public class ParallelStreamUtils extends StreamUtils {
 		}
 
 		final Stream<T> elementStream = setStream.flatMap(Collection::stream).parallel();
-		final Set<T> elementSet = elementStream.collect(Collectors.toCollection(LinkedHashSet::new));
+		final SequencedSet<T> elementSet = elementStream.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return elementSet;
 	}
@@ -158,10 +159,10 @@ public class ParallelStreamUtils extends StreamUtils {
 	}
 
 	@Override
-	public <T,U> Set<U> convertSet(final Set<T> initialSet, final Function<T,U> conversionFunction, final Class<T> inputClass, final Class<U> outputClass) {
+	public <T,U> SequencedSet<U> convertSet(final Set<T> initialSet, final Function<T,U> conversionFunction, final Class<T> inputClass, final Class<U> outputClass) {
 		final Stream<T> initialStream = this.ofNullableCollection(initialSet);
 		final Stream<U> finalStream = initialStream.map(conversionFunction).parallel();
-		final Set<U> finalSet = finalStream.collect(Collectors.toCollection(LinkedHashSet::new));
+		final SequencedSet<U> finalSet = finalStream.collect(Collectors.toCollection(LinkedHashSet::new));
 		return finalSet;
 	}
 }

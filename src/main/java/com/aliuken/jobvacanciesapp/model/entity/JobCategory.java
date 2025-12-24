@@ -20,6 +20,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import java.util.LinkedHashSet;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -58,19 +59,19 @@ public class JobCategory extends AbstractEntity<JobCategory> {
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getJobVacancyIds() {
-		final Set<Long> jobVacancyIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobVacancies)
-				.map(jv -> jv.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getJobVacancyIds() {
+		final SequencedSet<Long> jobVacancyIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobVacancies)
+			.map(jv -> jv.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobVacancyIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<String> getJobVacancyNames() {
-		final Set<String> jobVacancyNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobVacancies)
-				.map(jv -> jv.getName())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<String> getJobVacancyNames() {
+		final SequencedSet<String> jobVacancyNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobVacancies)
+			.map(jv -> jv.getName())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobVacancyNames;
 	}

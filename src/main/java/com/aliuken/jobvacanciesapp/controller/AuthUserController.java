@@ -40,6 +40,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.nio.file.Path;
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 
 @Controller
@@ -214,17 +215,17 @@ public class AuthUserController extends AbstractEntityControllerWithoutPredefine
 			authUserCredentialsService.deleteByIdAndFlush(authUserCredentials.getId());
 		}
 
-		final Set<Long> jobRequestIds = authUser.getJobRequestIds();
+		final SequencedSet<Long> jobRequestIds = authUser.getJobRequestIds();
 		for(final Long jobRequestId : jobRequestIds) {
 			jobRequestService.deleteByIdAndFlush(jobRequestId);
 		}
 
-		final Set<Long> authUserCurriculumIds = authUser.getAuthUserCurriculumIds();
+		final SequencedSet<Long> authUserCurriculumIds = authUser.getAuthUserCurriculumIds();
 		for(final Long authUserCurriculumId : authUserCurriculumIds) {
 			authUserCurriculumService.deleteByIdAndFlush(authUserCurriculumId);
 		}
 
-		final Set<Long> authUserRoleIds = authUser.getAuthUserRoleIds();
+		final SequencedSet<Long> authUserRoleIds = authUser.getAuthUserRoleIds();
 		for(final Long authUserRoleId : authUserRoleIds) {
 			authUserRoleService.deleteByIdAndFlush(authUserRoleId);
 		}

@@ -22,6 +22,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.SequencedSet;
 import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
@@ -169,11 +170,11 @@ public class JobCategoryRepositoryTest {
 		final Set<JobVacancy> jobVacancies = jobCategory.getJobVacancies();
 		Assertions.assertNull(jobVacancies);
 
-		final Set<Long> jobVacancyIds = jobCategory.getJobVacancyIds();
+		final SequencedSet<Long> jobVacancyIds = jobCategory.getJobVacancyIds();
 		Assertions.assertNotNull(jobVacancyIds);
 		Assertions.assertTrue(jobVacancyIds.isEmpty());
 
-		final Set<String> jobVacancyNames = jobCategory.getJobVacancyNames();
+		final SequencedSet<String> jobVacancyNames = jobCategory.getJobVacancyNames();
 		Assertions.assertNotNull(jobVacancyNames);
 		Assertions.assertTrue(jobVacancyNames.isEmpty());
 	}
@@ -242,7 +243,7 @@ public class JobCategoryRepositoryTest {
 		final JobCategory jobCategory = jobCategoryRepository.findByIdNotOptional(1L);
 		Assertions.assertNotNull(jobCategory);
 
-		final Set<Long> jobVacancyIds = jobCategory.getJobVacancyIds();
+		final SequencedSet<Long> jobVacancyIds = jobCategory.getJobVacancyIds();
 		Assertions.assertNotNull(jobVacancyIds);
 		for(final Long jobVacancyId : jobVacancyIds) {
 			jobVacancyRepository.deleteByIdAndFlush(jobVacancyId);
@@ -324,7 +325,7 @@ public class JobCategoryRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> jobVacancyIds = jobCategory.getJobVacancyIds();
+		final SequencedSet<Long> jobVacancyIds = jobCategory.getJobVacancyIds();
 		Assertions.assertNotNull(jobVacancyIds);
 		Assertions.assertEquals(6, jobVacancyIds.size());
 
@@ -332,7 +333,7 @@ public class JobCategoryRepositoryTest {
 			Assertions.assertNotNull(jobVacancyId);
 		}
 
-		final Set<String> jobVacancyNames = jobCategory.getJobVacancyNames();
+		final SequencedSet<String> jobVacancyNames = jobCategory.getJobVacancyNames();
 		Assertions.assertNotNull(jobVacancyNames);
 		Assertions.assertEquals(6, jobVacancyNames.size());
 

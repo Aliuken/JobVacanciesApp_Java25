@@ -29,6 +29,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -139,39 +140,39 @@ public class JobVacancy extends AbstractEntityWithJobCompany<JobVacancy> {
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getJobRequestIds() {
-		final Set<Long> jobRequestIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
-				.map(jr -> jr.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getJobRequestIds() {
+		final SequencedSet<Long> jobRequestIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
+			.map(jr -> jr.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobRequestIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<AuthUser> getAuthUsers() {
-		final Set<AuthUser> authUsers = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
-				.map(jr -> jr.getAuthUser())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<AuthUser> getAuthUsers() {
+		final SequencedSet<AuthUser> authUsers = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
+			.map(jr -> jr.getAuthUser())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authUsers;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getAuthUserIds() {
-		final Set<Long> authUserIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
-				.map(jr -> jr.getAuthUser())
-				.map(jv -> jv.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getAuthUserIds() {
+		final SequencedSet<Long> authUserIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
+			.map(jr -> jr.getAuthUser())
+			.map(jv -> jv.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authUserIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<String> getAuthUserEmails() {
-		final Set<String> authUserEmails = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
-				.map(jr -> jr.getAuthUser())
-				.map(jv -> jv.getEmail())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<String> getAuthUserEmails() {
+		final SequencedSet<String> authUserEmails = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
+			.map(jr -> jr.getAuthUser())
+			.map(jv -> jv.getEmail())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authUserEmails;
 	}

@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 
 public record JobCategoryDTO(
@@ -22,7 +23,7 @@ public record JobCategoryDTO(
 	String description,
 
 	@NotNull(message="{jobVacancyIds.notNull}")
-	Set<Long> jobVacancyIds
+	SequencedSet<Long> jobVacancyIds
 ) implements AbstractEntityDTO, Serializable {
 
 	private static final JobCategoryDTO NO_ARGS_INSTANCE = new JobCategoryDTO(null, null, null, null);

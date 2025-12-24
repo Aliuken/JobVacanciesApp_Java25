@@ -59,6 +59,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.function.Function;
 
@@ -429,7 +430,7 @@ public class JobVacancyController extends AbstractEntityControllerWithoutPredefi
 
 		final JobVacancy jobVacancy = jobVacancyService.findByIdNotOptional(jobVacancyId);
 
-		final Set<Long> jobRequestIds = jobVacancy.getJobRequestIds();
+		final SequencedSet<Long> jobRequestIds = jobVacancy.getJobRequestIds();
 		for(final Long jobRequestId : jobRequestIds) {
 			jobRequestService.deleteByIdAndFlush(jobRequestId);
 		}
@@ -485,7 +486,7 @@ public class JobVacancyController extends AbstractEntityControllerWithoutPredefi
 		final List<JobCompany> jobCompanies = jobCompanyService.findAll();
 		model.addAttribute("jobCompanies", jobCompanies);
 
-		final Set<Long> authUserJobVacancyIds;
+		final SequencedSet<Long> authUserJobVacancyIds;
 		if(authentication != null) {
 			final String email = authentication.getName();
 			final AuthUser authUser = authUserService.findByEmail(email);

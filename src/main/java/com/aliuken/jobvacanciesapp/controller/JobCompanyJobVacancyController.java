@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 
 @Controller
@@ -170,7 +171,7 @@ public class JobCompanyJobVacancyController extends AbstractEntityControllerWith
 
 		final JobVacancy jobVacancy = jobVacancyService.findByIdNotOptional(jobVacancyId);
 
-		final Set<Long> jobRequestIds = jobVacancy.getJobRequestIds();
+		final SequencedSet<Long> jobRequestIds = jobVacancy.getJobRequestIds();
 		for(final Long jobRequestId : jobRequestIds) {
 			jobRequestService.deleteByIdAndFlush(jobRequestId);
 		}

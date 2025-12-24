@@ -20,6 +20,7 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import java.util.LinkedHashSet;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -79,9 +80,9 @@ public class JobCompany extends AbstractEntity<JobCompany> {
 		}
 
 		final JobCompanyLogo selectedJobCompanyLogo = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobCompanyLogos)
-				.filter(jcl -> selectedLogoFileName.equals(jcl.getFileName()))
-				.findFirst()
-				.orElse(null);
+			.filter(jcl -> selectedLogoFileName.equals(jcl.getFileName()))
+			.findFirst()
+			.orElse(null);
 
 		return selectedJobCompanyLogo;
 	}
@@ -93,10 +94,10 @@ public class JobCompany extends AbstractEntity<JobCompany> {
 		}
 
 		final Long selectedJobCompanyLogoId = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobCompanyLogos)
-				.filter(jcl -> selectedLogoFileName.equals(jcl.getFileName()))
-				.map(jcl -> jcl.getId())
-				.findFirst()
-				.orElse(null);
+			.filter(jcl -> selectedLogoFileName.equals(jcl.getFileName()))
+			.map(jcl -> jcl.getId())
+			.findFirst()
+			.orElse(null);
 
 		return selectedJobCompanyLogoId;
 	}
@@ -108,10 +109,10 @@ public class JobCompany extends AbstractEntity<JobCompany> {
 		}
 
 		final String selectedJobCompanyLogoFilePath = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobCompanyLogos)
-				.filter(jcl -> selectedLogoFileName.equals(jcl.getFileName()))
-				.map(jcl -> jcl.getFilePath())
-				.findFirst()
-				.orElse(Constants.NO_SELECTED_LOGO_FILE_PATH);
+			.filter(jcl -> selectedLogoFileName.equals(jcl.getFileName()))
+			.map(jcl -> jcl.getFilePath())
+			.findFirst()
+			.orElse(Constants.NO_SELECTED_LOGO_FILE_PATH);
 
 		return selectedJobCompanyLogoFilePath;
 	}
@@ -123,46 +124,46 @@ public class JobCompany extends AbstractEntity<JobCompany> {
 		}
 
 		final String selectedJobCompanyLogoSelectionName = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobCompanyLogos)
-				.filter(jcl -> selectedLogoFileName.equals(jcl.getFileName()))
-				.map(jcl -> jcl.getSelectionName())
-				.findFirst()
-				.orElse(null);
+			.filter(jcl -> selectedLogoFileName.equals(jcl.getFileName()))
+			.map(jcl -> jcl.getSelectionName())
+			.findFirst()
+			.orElse(null);
 
 		return selectedJobCompanyLogoSelectionName;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getJobCompanyLogoIds() {
-		final Set<Long> jobCompanyLogoIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobCompanyLogos)
-				.map(jcl -> jcl.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getJobCompanyLogoIds() {
+		final SequencedSet<Long> jobCompanyLogoIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobCompanyLogos)
+			.map(jcl -> jcl.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobCompanyLogoIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<String> getJobCompanyLogoSelectionNames() {
-		final Set<String> jobCompanyLogoSelectionNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobCompanyLogos)
-				.map(jcl -> jcl.getSelectionName())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<String> getJobCompanyLogoSelectionNames() {
+		final SequencedSet<String> jobCompanyLogoSelectionNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobCompanyLogos)
+			.map(jcl -> jcl.getSelectionName())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobCompanyLogoSelectionNames;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getJobVacancyIds() {
-		final Set<Long> jobVacancyIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobVacancies)
-				.map(jv -> jv.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getJobVacancyIds() {
+		final SequencedSet<Long> jobVacancyIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobVacancies)
+			.map(jv -> jv.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobVacancyIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<String> getJobVacancyNames() {
-		final Set<String> jobVacancyNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobVacancies)
-				.map(jv -> jv.getName())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<String> getJobVacancyNames() {
+		final SequencedSet<String> jobVacancyNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobVacancies)
+			.map(jv -> jv.getName())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobVacancyNames;
 	}

@@ -31,6 +31,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.SequencedSet;
 import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
@@ -256,7 +257,7 @@ public class JobVacancyRepositoryTest {
 	public void testDeleteById_Ok() {
 		final JobVacancy jobVacancy = jobVacancyRepository.findByIdNotOptional(1L);
 
-		final Set<Long> jobRequestIds = jobVacancy.getJobRequestIds();
+		final SequencedSet<Long> jobRequestIds = jobVacancy.getJobRequestIds();
 		Assertions.assertNotNull(jobRequestIds);
 		for(final Long jobRequestId : jobRequestIds) {
 			Assertions.assertNotNull(jobRequestId);

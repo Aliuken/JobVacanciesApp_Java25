@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.Collection;
 import java.util.LinkedHashSet;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -54,7 +55,7 @@ public class SpringSecurityUtils {
 
 	public boolean hasAnyAuthority(final String... authorityNamesVarargs) {
 		if(LogicalUtils.isNotNullNorEmpty(authorityNamesVarargs)) {
-			final Set<String> grantedAuthorityNames = this.getAuthorityNames();
+			final SequencedSet<String> grantedAuthorityNames = this.getAuthorityNames();
 
 			if(LogicalUtils.isNotNullNorEmpty(grantedAuthorityNames)) {
 				for(final String authorityName : authorityNamesVarargs) {
@@ -87,7 +88,7 @@ public class SpringSecurityUtils {
 	}
 
 	public String getMaxPriorityAuthorityName() {
-		final Set<String> grantedAuthorityNames = this.getAuthorityNames();
+		final SequencedSet<String> grantedAuthorityNames = this.getAuthorityNames();
 
 		if(grantedAuthorityNames.contains(AuthRole.ADMINISTRATOR)) {
 			return AuthRole.ADMINISTRATOR;
@@ -100,7 +101,7 @@ public class SpringSecurityUtils {
 		}
 	}
 
-	public Set<String> getAuthorityNames() {
+	public SequencedSet<String> getAuthorityNames() {
 		final Authentication authentication = this.getAuthentication();
 
 		final Collection<? extends GrantedAuthority> grantedAuthorities;
@@ -110,9 +111,9 @@ public class SpringSecurityUtils {
 			grantedAuthorities = null;
 		}
 
-		final Set<String> grantedAuthorityNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(grantedAuthorities)
-				.map(grantedAuthority -> grantedAuthority.getAuthority())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+		final SequencedSet<String> grantedAuthorityNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(grantedAuthorities)
+			.map(grantedAuthority -> grantedAuthority.getAuthority())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return grantedAuthorityNames;
 	}

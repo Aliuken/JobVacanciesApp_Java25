@@ -37,6 +37,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -278,7 +279,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> authUserRoleIds = authUser.getAuthUserRoleIds();
+		final SequencedSet<Long> authUserRoleIds = authUser.getAuthUserRoleIds();
 		Assertions.assertNotNull(authUserRoleIds);
 		Assertions.assertEquals(1, authUserRoleIds.size());
 
@@ -286,7 +287,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(authUserRoleId);
 		}
 
-		final Set<AuthRole> authRoles = authUser.getAuthRoles();
+		final SequencedSet<AuthRole> authRoles = authUser.getAuthRoles();
 		Assertions.assertNotNull(authRoles);
 		Assertions.assertEquals(1, authRoles.size());
 
@@ -301,7 +302,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> authRoleIds = authUser.getAuthRoleIds();
+		final SequencedSet<Long> authRoleIds = authUser.getAuthRoleIds();
 		Assertions.assertNotNull(authRoleIds);
 		Assertions.assertEquals(1, authRoleIds.size());
 
@@ -309,7 +310,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertEquals(3L, authRoleId);
 		}
 
-		final Set<String> authRoleNames = authUser.getAuthRoleNames();
+		final SequencedSet<String> authRoleNames = authUser.getAuthRoleNames();
 		Assertions.assertNotNull(authRoleNames);
 		Assertions.assertEquals(1, authRoleNames.size());
 
@@ -511,26 +512,26 @@ public class AuthUserRepositoryTest {
 			authUserCredentialsRepository.deleteByIdAndFlush(authUserCredentials.getId());
 		}
 
-		final Set<Long> jobRequestIds = authUser.getJobRequestIds();
+		final SequencedSet<Long> jobRequestIds = authUser.getJobRequestIds();
 		Assertions.assertNotNull(jobRequestIds);
 		for(final Long jobRequestId : jobRequestIds) {
 			Assertions.assertNotNull(jobRequestId);
 			jobRequestRepository.deleteByIdAndFlush(jobRequestId);
 		}
 
-		final Set<Long> authUserCurriculumIds = authUser.getAuthUserCurriculumIds();
+		final SequencedSet<Long> authUserCurriculumIds = authUser.getAuthUserCurriculumIds();
 		Assertions.assertNotNull(authUserCurriculumIds);
 		for(final Long authUserCurriculumId : authUserCurriculumIds) {
 			authUserCurriculumRepository.deleteByIdAndFlush(authUserCurriculumId);
 		}
 
-		final Set<Long> authUserEntityQueryIds = authUser.getAuthUserEntityQueryIds();
+		final SequencedSet<Long> authUserEntityQueryIds = authUser.getAuthUserEntityQueryIds();
 		Assertions.assertNotNull(authUserEntityQueryIds);
 		for(final Long authUserEntityQueryId : authUserEntityQueryIds) {
 			authUserEntityQueryRepository.deleteByIdAndFlush(authUserEntityQueryId);
 		}
 
-		final Set<Long> authUserRoleIds = authUser.getAuthUserRoleIds();
+		final SequencedSet<Long> authUserRoleIds = authUser.getAuthUserRoleIds();
 		Assertions.assertNotNull(authUserRoleIds);
 		for(final Long authUserRoleId : authUserRoleIds) {
 			Assertions.assertNotNull(authUserRoleId);
@@ -744,7 +745,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> authUserRoleIds = authUser.getAuthUserRoleIds();
+		final SequencedSet<Long> authUserRoleIds = authUser.getAuthUserRoleIds();
 		Assertions.assertNotNull(authUserRoleIds);
 		Assertions.assertEquals(2, authUserRoleIds.size());
 
@@ -752,7 +753,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(authUserRoleId);
 		}
 
-		final Set<AuthRole> authRoles = authUser.getAuthRoles();
+		final SequencedSet<AuthRole> authRoles = authUser.getAuthRoles();
 		Assertions.assertNotNull(authRoles);
 		Assertions.assertEquals(2, authRoles.size());
 
@@ -768,7 +769,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> authRoleIds = authUser.getAuthRoleIds();
+		final SequencedSet<Long> authRoleIds = authUser.getAuthRoleIds();
 		Assertions.assertNotNull(authRoleIds);
 		Assertions.assertEquals(2, authRoleIds.size());
 
@@ -776,7 +777,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(authRoleId);
 		}
 
-		final Set<String> authRoleNames = authUser.getAuthRoleNames();
+		final SequencedSet<String> authRoleNames = authUser.getAuthRoleNames();
 		Assertions.assertNotNull(authRoleNames);
 		Assertions.assertEquals(2, authRoleNames.size());
 
@@ -784,7 +785,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(authRoleName);
 		}
 
-		final Set<Long> jobRequestIds = authUser.getJobRequestIds();
+		final SequencedSet<Long> jobRequestIds = authUser.getJobRequestIds();
 		Assertions.assertNotNull(jobRequestIds);
 		Assertions.assertEquals(6, jobRequestIds.size());
 
@@ -792,7 +793,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(jobVacancyId);
 		}
 
-		final Set<JobVacancy> jobVacancies = authUser.getJobVacancies();
+		final SequencedSet<JobVacancy> jobVacancies = authUser.getJobVacancies();
 		Assertions.assertNotNull(jobVacancies);
 		Assertions.assertEquals(6, jobVacancies.size());
 
@@ -808,7 +809,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> jobVacancyIds = authUser.getJobVacancyIds();
+		final SequencedSet<Long> jobVacancyIds = authUser.getJobVacancyIds();
 		Assertions.assertNotNull(jobVacancyIds);
 		Assertions.assertEquals(6, jobVacancyIds.size());
 
@@ -816,7 +817,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(jobVacancyId);
 		}
 
-		final Set<String> jobVacancyNames = authUser.getJobVacancyNames();
+		final SequencedSet<String> jobVacancyNames = authUser.getJobVacancyNames();
 		Assertions.assertNotNull(jobVacancyNames);
 		Assertions.assertEquals(6, jobVacancyNames.size());
 
@@ -824,7 +825,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(jobVacancyName);
 		}
 
-		final Set<Long> authUserCurriculumIds = authUser.getAuthUserCurriculumIds();
+		final SequencedSet<Long> authUserCurriculumIds = authUser.getAuthUserCurriculumIds();
 		Assertions.assertNotNull(authUserCurriculumIds);
 		Assertions.assertEquals(2, authUserCurriculumIds.size());
 
@@ -832,7 +833,7 @@ public class AuthUserRepositoryTest {
 			Assertions.assertNotNull(authUserCurriculumId);
 		}
 
-		final Set<String> authUserCurriculumSelectionNames = authUser.getAuthUserCurriculumSelectionNames();
+		final SequencedSet<String> authUserCurriculumSelectionNames = authUser.getAuthUserCurriculumSelectionNames();
 		Assertions.assertNotNull(authUserCurriculumSelectionNames);
 		Assertions.assertEquals(2, authUserCurriculumSelectionNames.size());
 

@@ -5,6 +5,7 @@ import com.aliuken.jobvacanciesapp.model.dto.superinterface.AbstractEntityDTO;
 import com.aliuken.jobvacanciesapp.model.entity.superclass.AbstractEntity;
 
 import java.util.List;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -38,8 +39,8 @@ public abstract class EntityToDtoConverter<T extends AbstractEntity,U extends Ab
 		return dtoList;
 	}
 
-	public Set<U> convertEntitySet(final Set<T> entitySet) {
-		final Set<U> dtoSet = Constants.PARALLEL_STREAM_UTILS.convertSet(entitySet, conversionFunction, inputClass, outputClass);
+	public SequencedSet<U> convertEntitySet(final Set<T> entitySet) {
+		final SequencedSet<U> dtoSet = Constants.PARALLEL_STREAM_UTILS.convertSet(entitySet, conversionFunction, inputClass, outputClass);
 		return dtoSet;
 	}
 }

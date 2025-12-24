@@ -25,6 +25,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.SequencedSet;
 import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
@@ -178,11 +179,11 @@ public class JobCompanyRepositoryTest {
 		final Set<JobVacancy> jobVacancies = jobCompany.getJobVacancies();
 		Assertions.assertNull(jobVacancies);
 
-		final Set<Long> jobVacancyIds = jobCompany.getJobVacancyIds();
+		final SequencedSet<Long> jobVacancyIds = jobCompany.getJobVacancyIds();
 		Assertions.assertNotNull(jobVacancyIds);
 		Assertions.assertTrue(jobVacancyIds.isEmpty());
 
-		final Set<String> jobVacancyNames = jobCompany.getJobVacancyNames();
+		final SequencedSet<String> jobVacancyNames = jobCompany.getJobVacancyNames();
 		Assertions.assertNotNull(jobVacancyNames);
 		Assertions.assertTrue(jobVacancyNames.isEmpty());
 	}
@@ -255,7 +256,7 @@ public class JobCompanyRepositoryTest {
 		Assertions.assertNotNull(jobVacancies);
 		for(final JobVacancy jobVacancy : jobVacancies) {
 			Assertions.assertNotNull(jobVacancy);
-			final Set<Long> jobRequestIds = jobVacancy.getJobRequestIds();
+			final SequencedSet<Long> jobRequestIds = jobVacancy.getJobRequestIds();
 			Assertions.assertNotNull(jobRequestIds);
 			for(final Long jobRequestId : jobRequestIds) {
 				jobRequestRepository.deleteByIdAndFlush(jobRequestId);
@@ -264,7 +265,7 @@ public class JobCompanyRepositoryTest {
 			jobVacancyRepository.deleteByIdAndFlush(jobVacancy.getId());
 		}
 
-		final Set<Long> jobCompanyLogoIds = jobCompany.getJobCompanyLogoIds();
+		final SequencedSet<Long> jobCompanyLogoIds = jobCompany.getJobCompanyLogoIds();
 		Assertions.assertNotNull(jobCompanyLogoIds);
 		for(final Long jobCompanyLogoId : jobCompanyLogoIds) {
 			jobCompanyLogoRepository.deleteByIdAndFlush(jobCompanyLogoId);
@@ -364,7 +365,7 @@ public class JobCompanyRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> jobVacancyIds = jobCompany.getJobVacancyIds();
+		final SequencedSet<Long> jobVacancyIds = jobCompany.getJobVacancyIds();
 		Assertions.assertNotNull(jobVacancyIds);
 		Assertions.assertEquals(6, jobVacancyIds.size());
 
@@ -372,7 +373,7 @@ public class JobCompanyRepositoryTest {
 			Assertions.assertNotNull(jobVacancyId);
 		}
 
-		final Set<String> jobVacancyNames = jobCompany.getJobVacancyNames();
+		final SequencedSet<String> jobVacancyNames = jobCompany.getJobVacancyNames();
 		Assertions.assertNotNull(jobVacancyNames);
 		Assertions.assertEquals(6, jobVacancyNames.size());
 
@@ -380,7 +381,7 @@ public class JobCompanyRepositoryTest {
 			Assertions.assertNotNull(jobVacancyName);
 		}
 
-		final Set<Long> jobCompanyLogoIds = jobCompany.getJobCompanyLogoIds();
+		final SequencedSet<Long> jobCompanyLogoIds = jobCompany.getJobCompanyLogoIds();
 		Assertions.assertNotNull(jobCompanyLogoIds);
 		Assertions.assertEquals(6, jobCompanyLogoIds.size());
 
@@ -388,7 +389,7 @@ public class JobCompanyRepositoryTest {
 			Assertions.assertNotNull(jobCompanyLogoId);
 		}
 
-		final Set<String> jobCompanyLogoSelectionNames = jobCompany.getJobCompanyLogoSelectionNames();
+		final SequencedSet<String> jobCompanyLogoSelectionNames = jobCompany.getJobCompanyLogoSelectionNames();
 		Assertions.assertNotNull(jobCompanyLogoSelectionNames);
 		Assertions.assertEquals(6, jobCompanyLogoSelectionNames.size());
 
@@ -425,7 +426,7 @@ public class JobCompanyRepositoryTest {
 		Assertions.assertEquals(selectedJobCompanyLogoId, jobCompanyDTO.selectedLogoId());
 		Assertions.assertEquals(selectedJobCompanyLogoFilePath, jobCompanyDTO.selectedLogoFilePath());
 
-		final Set<JobCompanyLogoDTO> jobCompanyLogoDTOs = JobCompanyLogoConverter.getInstance().convertEntitySet(jobCompanyLogos);
+		final SequencedSet<JobCompanyLogoDTO> jobCompanyLogoDTOs = JobCompanyLogoConverter.getInstance().convertEntitySet(jobCompanyLogos);
 		Assertions.assertEquals(jobCompanyLogoDTOs, jobCompanyDTO.jobCompanyLogos());
 	}
 }

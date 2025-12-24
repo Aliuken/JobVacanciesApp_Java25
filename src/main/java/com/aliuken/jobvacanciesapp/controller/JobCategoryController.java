@@ -38,6 +38,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 
 @Controller
@@ -240,7 +241,7 @@ public class JobCategoryController extends AbstractEntityControllerWithoutPredef
 			jobCategory.setName(name);
 			jobCategory.setDescription(description);
 
-			final Set<JobVacancy> jobVacancies = new LinkedHashSet<>();
+			final SequencedSet<JobVacancy> jobVacancies = new LinkedHashSet<>();
 			if(jobVacancyIds != null) {
 				for(final Long jobVacancyId : jobVacancyIds) {
 					final JobVacancy jobVacancy = jobVacancyService.findByIdNotOptional(jobVacancyId);
@@ -291,11 +292,11 @@ public class JobCategoryController extends AbstractEntityControllerWithoutPredef
 
 		final JobCategory jobCategory = jobCategoryService.findByIdNotOptional(jobCategoryId);
 
-		final Set<Long> jobVacancyIds = jobCategory.getJobVacancyIds();
+		final SequencedSet<Long> jobVacancyIds = jobCategory.getJobVacancyIds();
 		for(final Long jobVacancyId : jobVacancyIds) {
 			final JobVacancy jobVacancy = jobVacancyService.findByIdNotOptional(jobVacancyId);
 
-			final Set<Long> jobRequestIds = jobVacancy.getJobRequestIds();
+			final SequencedSet<Long> jobRequestIds = jobVacancy.getJobRequestIds();
 			for(final Long jobRequestId : jobRequestIds) {
 				jobRequestService.deleteByIdAndFlush(jobRequestId);
 			}

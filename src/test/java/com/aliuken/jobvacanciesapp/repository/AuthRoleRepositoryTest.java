@@ -20,6 +20,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -200,7 +201,7 @@ public class AuthRoleRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> authUserRoleIds = authRole.getAuthUserRoleIds();
+		final SequencedSet<Long> authUserRoleIds = authRole.getAuthUserRoleIds();
 		Assertions.assertNotNull(authUserRoleIds);
 		Assertions.assertEquals(1, authUserRoleIds.size());
 
@@ -208,7 +209,7 @@ public class AuthRoleRepositoryTest {
 			Assertions.assertNotNull(authUserRoleId);
 		}
 
-		final Set<AuthUser> authUsers = authRole.getAuthUsers();
+		final SequencedSet<AuthUser> authUsers = authRole.getAuthUsers();
 		Assertions.assertNotNull(authUsers);
 		Assertions.assertEquals(1, authUsers.size());
 
@@ -224,7 +225,7 @@ public class AuthRoleRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> authUserIds = authRole.getAuthUserIds();
+		final SequencedSet<Long> authUserIds = authRole.getAuthUserIds();
 		Assertions.assertNotNull(authUserIds);
 		Assertions.assertEquals(1, authUserIds.size());
 
@@ -232,7 +233,7 @@ public class AuthRoleRepositoryTest {
 			Assertions.assertNotNull(authUserId);
 		}
 
-		final Set<String> authUserEmails = authRole.getAuthUserEmails();
+		final SequencedSet<String> authUserEmails = authRole.getAuthUserEmails();
 		Assertions.assertNotNull(authUserEmails);
 		Assertions.assertEquals(1, authUserEmails.size());
 
@@ -306,7 +307,7 @@ public class AuthRoleRepositoryTest {
 		final AuthRole authRole = authRoleRepository.findByIdNotOptional(1L);
 		Assertions.assertNotNull(authRole);
 
-		final Set<Long> authUserRoleIds = authRole.getAuthUserRoleIds();
+		final SequencedSet<Long> authUserRoleIds = authRole.getAuthUserRoleIds();
 		Assertions.assertNotNull(authUserRoleIds);
 		for(final Long authUserRoleId : authUserRoleIds) {
 			authUserRoleRepository.deleteByIdAndFlush(authUserRoleId);
@@ -394,7 +395,7 @@ public class AuthRoleRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> authUserRoleIds = authRole.getAuthUserRoleIds();
+		final SequencedSet<Long> authUserRoleIds = authRole.getAuthUserRoleIds();
 		Assertions.assertNotNull(authUserRoleIds);
 		Assertions.assertEquals(2, authUserRoleIds.size());
 
@@ -402,7 +403,7 @@ public class AuthRoleRepositoryTest {
 			Assertions.assertNotNull(authUserRoleId);
 		}
 
-		final Set<AuthUser> authUsers = authRole.getAuthUsers();
+		final SequencedSet<AuthUser> authUsers = authRole.getAuthUsers();
 		Assertions.assertNotNull(authUsers);
 		Assertions.assertEquals(2, authUsers.size());
 
@@ -418,7 +419,7 @@ public class AuthRoleRepositoryTest {
 			Assertions.assertNotNull(firstRegistrationAuthUser2.getEmail());
 		}
 
-		final Set<Long> authUserIds = authRole.getAuthUserIds();
+		final SequencedSet<Long> authUserIds = authRole.getAuthUserIds();
 		Assertions.assertNotNull(authUserIds);
 		Assertions.assertEquals(2, authUserIds.size());
 
@@ -426,7 +427,7 @@ public class AuthRoleRepositoryTest {
 			Assertions.assertNotNull(authUserId);
 		}
 
-		final Set<String> authUserEmails = authRole.getAuthUserEmails();
+		final SequencedSet<String> authUserEmails = authRole.getAuthUserEmails();
 		Assertions.assertNotNull(authUserEmails);
 		Assertions.assertEquals(2, authUserEmails.size());
 

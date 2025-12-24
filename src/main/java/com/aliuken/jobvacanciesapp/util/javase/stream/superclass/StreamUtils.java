@@ -6,6 +6,7 @@ import com.aliuken.jobvacanciesapp.util.javase.stream.SequentialStreamUtils;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.function.Function;
 import java.util.function.IntFunction;
@@ -47,6 +48,6 @@ public abstract class StreamUtils {
 
 	public abstract <T,U> List<U> convertList(final List<T> initialList, final Function<T,U> conversionFunction, final Class<T> inputClass, final Class<U> outputClass);
 
-	public abstract <T,U> Set<U> convertSet(final Set<T> initialSet, final Function<T,U> conversionFunction, final Class<T> inputClass, final Class<U> outputClass);
+	public abstract <T,U> SequencedSet<U> convertSet(final Set<T> initialSet, final Function<T,U> conversionFunction, final Class<T> inputClass, final Class<U> outputClass);
 
 }

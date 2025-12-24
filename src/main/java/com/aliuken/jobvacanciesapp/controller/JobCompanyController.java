@@ -54,6 +54,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 
 @Controller
@@ -332,7 +333,7 @@ public class JobCompanyController extends AbstractEntityControllerWithoutPredefi
 				jobCompany.setSelectedLogoFileName(selectedSavedFileName);
 			}
 
-			final Set<JobCompanyLogo> jobCompanyLogos = new LinkedHashSet<>();
+			final SequencedSet<JobCompanyLogo> jobCompanyLogos = new LinkedHashSet<>();
 			if(jobCompanyLogoDTOs != null) {
 				for(final JobCompanyLogoDTO jobCompanyDTOLogo : jobCompanyLogoDTOs) {
 					final Long jobCompanyLogoId = jobCompanyDTOLogo.id();
@@ -451,7 +452,7 @@ public class JobCompanyController extends AbstractEntityControllerWithoutPredefi
 
 		final Set<JobVacancy> jobVacancies = jobCompany.getJobVacancies();
 		for(final JobVacancy jobVacancy : jobVacancies) {
-			final Set<Long> jobRequestIds = jobVacancy.getJobRequestIds();
+			final SequencedSet<Long> jobRequestIds = jobVacancy.getJobRequestIds();
 			for(final Long jobRequestId : jobRequestIds) {
 				jobRequestService.deleteByIdAndFlush(jobRequestId);
 			}
@@ -459,7 +460,7 @@ public class JobCompanyController extends AbstractEntityControllerWithoutPredefi
 			jobVacancyService.deleteByIdAndFlush(jobVacancy.getId());
 		}
 
-		final Set<Long> jobCompanyLogoIds = jobCompany.getJobCompanyLogoIds();
+		final SequencedSet<Long> jobCompanyLogoIds = jobCompany.getJobCompanyLogoIds();
 		for(final Long jobCompanyLogoId : jobCompanyLogoIds) {
 			jobCompanyLogoService.deleteByIdAndFlush(jobCompanyLogoId);
 		}

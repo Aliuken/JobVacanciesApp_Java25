@@ -36,6 +36,7 @@ import java.io.ObjectInput;
 import java.io.ObjectOutput;
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -180,104 +181,104 @@ public class AuthUser extends AbstractEntity<AuthUser> implements Externalizable
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getAuthUserRoleIds() {
-		final Set<Long> authUserRoleIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
-				.map(aur -> aur.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getAuthUserRoleIds() {
+		final SequencedSet<Long> authUserRoleIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
+			.map(aur -> aur.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authUserRoleIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<AuthRole> getAuthRoles() {
-		final Set<AuthRole> authRoles = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
-				.map(aur -> aur.getAuthRole())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<AuthRole> getAuthRoles() {
+		final SequencedSet<AuthRole> authRoles = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
+			.map(aur -> aur.getAuthRole())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authRoles;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getAuthRoleIds() {
-		final Set<Long> authRoleIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
-				.map(aur -> aur.getAuthRole())
-				.map(ar -> ar.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getAuthRoleIds() {
+		final SequencedSet<Long> authRoleIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
+			.map(aur -> aur.getAuthRole())
+			.map(ar -> ar.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authRoleIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<String> getAuthRoleNames() {
-		final Set<String> authRoleNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
-				.map(aur -> aur.getAuthRole())
-				.map(ar -> ar.getName())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<String> getAuthRoleNames() {
+		final SequencedSet<String> authRoleNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
+			.map(aur -> aur.getAuthRole())
+			.map(ar -> ar.getName())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authRoleNames;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getJobRequestIds() {
-		final Set<Long> jobRequestIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
-				.map(jr -> jr.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getJobRequestIds() {
+		final SequencedSet<Long> jobRequestIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
+			.map(jr -> jr.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobRequestIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<JobVacancy> getJobVacancies() {
-		final Set<JobVacancy> jobVacancies = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
-				.map(jr -> jr.getJobVacancy())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<JobVacancy> getJobVacancies() {
+		final SequencedSet<JobVacancy> jobVacancies = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
+			.map(jr -> jr.getJobVacancy())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobVacancies;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getJobVacancyIds() {
-		final Set<Long> jobVacancyIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
-				.map(jr -> jr.getJobVacancy())
-				.map(jv -> jv.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getJobVacancyIds() {
+		final SequencedSet<Long> jobVacancyIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
+			.map(jr -> jr.getJobVacancy())
+			.map(jv -> jv.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobVacancyIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<String> getJobVacancyNames() {
-		final Set<String> jobVacancyNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
-				.map(jr -> jr.getJobVacancy())
-				.map(jv -> jv.getName())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<String> getJobVacancyNames() {
+		final SequencedSet<String> jobVacancyNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(jobRequests)
+			.map(jr -> jr.getJobVacancy())
+			.map(jv -> jv.getName())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return jobVacancyNames;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getAuthUserCurriculumIds() {
-		final Set<Long> authUserCurriculumIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserCurriculums)
-				.map(auc -> auc.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getAuthUserCurriculumIds() {
+		final SequencedSet<Long> authUserCurriculumIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserCurriculums)
+			.map(auc -> auc.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authUserCurriculumIds;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<String> getAuthUserCurriculumSelectionNames() {
-		final Set<String> authUserCurriculumSelectionNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserCurriculums)
-				.map(auc -> auc.getSelectionName())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<String> getAuthUserCurriculumSelectionNames() {
+		final SequencedSet<String> authUserCurriculumSelectionNames = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserCurriculums)
+			.map(auc -> auc.getSelectionName())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authUserCurriculumSelectionNames;
 	}
 
 	@LazyEntityRelationGetter
-	public Set<Long> getAuthUserEntityQueryIds() {
-		final Set<Long> authUserEntityQueryIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserEntityQueries)
-				.map(aueq -> aueq.getId())
-				.collect(Collectors.toCollection(LinkedHashSet::new));
+	public SequencedSet<Long> getAuthUserEntityQueryIds() {
+		final SequencedSet<Long> authUserEntityQueryIds = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserEntityQueries)
+			.map(aueq -> aueq.getId())
+			.collect(Collectors.toCollection(LinkedHashSet::new));
 
 		return authUserEntityQueryIds;
 	}
@@ -288,10 +289,10 @@ public class AuthUser extends AbstractEntity<AuthUser> implements Externalizable
 			return null;
 		}
 
-		AuthRole authRole = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
-				.findFirst()
-				.map(aur -> aur.getAuthRole())
-				.orElse(null);
+		final AuthRole authRole = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
+			.findFirst()
+			.map(aur -> aur.getAuthRole())
+			.orElse(null);
 
 		return authRole;
 	}
@@ -302,11 +303,11 @@ public class AuthUser extends AbstractEntity<AuthUser> implements Externalizable
 			return null;
 		}
 
-		Long authRoleId = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
-				.findFirst()
-				.map(aur -> aur.getAuthRole())
-				.map(ar -> ar.getId())
-				.orElse(null);
+		final Long authRoleId = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
+			.findFirst()
+			.map(aur -> aur.getAuthRole())
+			.map(ar -> ar.getId())
+			.orElse(null);
 
 		return authRoleId;
 	}
@@ -317,11 +318,11 @@ public class AuthUser extends AbstractEntity<AuthUser> implements Externalizable
 			return null;
 		}
 
-		String authRoleName = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
-				.findFirst()
-				.map(aur -> aur.getAuthRole())
-				.map(ar -> ar.getName())
-				.orElse(null);
+		final String authRoleName = Constants.PARALLEL_STREAM_UTILS.ofNullableCollection(authUserRoles)
+			.findFirst()
+			.map(aur -> aur.getAuthRole())
+			.map(ar -> ar.getName())
+			.orElse(null);
 
 		return authRoleName;
 	}

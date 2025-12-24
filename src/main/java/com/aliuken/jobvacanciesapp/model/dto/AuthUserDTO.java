@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Size;
 
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.SequencedSet;
 import java.util.Set;
 
 public record AuthUserDTO(
@@ -55,7 +56,7 @@ public record AuthUserDTO(
 	String maxPriorityAuthRoleName,
 
 	@NotEmpty(message="{authRoleNames.notEmpty}")
-	Set<String> authRoleNames
+	SequencedSet<String> authRoleNames
 ) implements AbstractEntityDTO, Serializable {
 
 	private static final AuthUserDTO NO_ARGS_INSTANCE = new AuthUserDTO(null, null, null, null, null, null, null, null, null, null, null, null, null);
