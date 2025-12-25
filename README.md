@@ -84,7 +84,6 @@
 > | CV           | Curriculum Vitae                   |
 > | G1           | Garbage-First collector            |
 > | GNU          | GNU's Not Unix!                    |
-> | info         | Information                        |
 > | JDK          | Java Development Kit               |
 > | PDF          | Portable Document Format           |
 > | pkg          | Java package                       |
@@ -245,7 +244,7 @@ The web technologies currently used are:
 * **HTML5** files: For the web pages. Located in [src/main/resources/templates](https://github.com/Aliuken/JobVacanciesApp_Java25/tree/main/src/main/resources/templates).
 * **Thymeleaf**: As the HTML5 template engine (configured in [WebTemplateConfig](https://github.com/Aliuken/JobVacanciesApp_Java25/blob/main/src/main/java/com/aliuken/jobvacanciesapp/config/WebTemplateConfig.java)), using:
     * The decorator [template.html](https://github.com/Aliuken/JobVacanciesApp_Java25/blob/main/src/main/resources/templates/fragments/mandatory/template.html) (which uses **thymeleaf-layout-dialect** [[&#10138;]](https://mvnrepository.com/artifact/nz.net.ultraq.thymeleaf/thymeleaf-layout-dialect) to create the layout template).
-    * Other fragments in [src/main/resources/templates/fragments](https://github.com/Aliuken/JobVacanciesApp_Java25/tree/main/src/main/resources/templates/fragments). More info about fragments at <https://www.thymeleaf.org/doc/articles/layouts.html>.
+    * Other fragments in [src/main/resources/templates/fragments](https://github.com/Aliuken/JobVacanciesApp_Java25/tree/main/src/main/resources/templates/fragments). More information about fragments at <https://www.thymeleaf.org/doc/articles/layouts.html>.
 * **JS**: As the frontend OOP language.
 * **TS**: Compiled to JS (version **ES2020**) using the [TypeScript Playground](https://www.typescriptlang.org/play/) (so that we didn't need to install "Node.js", "npm" and "TS").
 * **Bootstrap 5.3.8** and **Material Design for Bootstrap 9.3.0**: For the look-and-feel.
