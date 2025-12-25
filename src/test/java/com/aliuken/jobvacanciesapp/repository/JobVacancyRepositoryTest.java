@@ -11,6 +11,7 @@ import com.aliuken.jobvacanciesapp.model.dto.converter.JobVacancyConverter;
 import com.aliuken.jobvacanciesapp.model.entity.AuthUser;
 import com.aliuken.jobvacanciesapp.model.entity.JobCategory;
 import com.aliuken.jobvacanciesapp.model.entity.JobCompany;
+import com.aliuken.jobvacanciesapp.model.entity.JobRequest;
 import com.aliuken.jobvacanciesapp.model.entity.JobVacancy;
 import com.aliuken.jobvacanciesapp.model.entity.enumtype.Currency;
 import com.aliuken.jobvacanciesapp.model.entity.enumtype.JobVacancyStatus;
@@ -32,6 +33,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.SequencedSet;
+import java.util.Set;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
@@ -334,6 +336,26 @@ public class JobVacancyRepositoryTest {
 			Assertions.assertNotNull(lastModificationAuthUser.getId());
 			Assertions.assertNotNull(lastModificationAuthUser.getEmail());
 		}
+
+		final Set<JobRequest> jobRequests = jobVacancy.getJobRequests();
+		Assertions.assertNotNull(jobRequests);
+		Assertions.assertEquals(1, jobRequests.size());
+
+		final SequencedSet<Long> jobRequestIds = jobVacancy.getJobRequestIds();
+		Assertions.assertNotNull(jobRequestIds);
+		Assertions.assertEquals(1, jobRequestIds.size());
+
+		final SequencedSet<AuthUser> authUsers = jobVacancy.getAuthUsers();
+		Assertions.assertNotNull(authUsers);
+		Assertions.assertEquals(1, authUsers.size());
+
+		final SequencedSet<Long> authUserIds = jobVacancy.getAuthUserIds();
+		Assertions.assertNotNull(authUserIds);
+		Assertions.assertEquals(1, authUserIds.size());
+
+		final SequencedSet<String> authUserEmails = jobVacancy.getAuthUserEmails();
+		Assertions.assertNotNull(authUserEmails);
+		Assertions.assertEquals(1, authUserEmails.size());
 
 		final JobVacancyDTO jobVacancyDTO = JobVacancyConverter.getInstance().convertEntityElement(jobVacancy);
 		this.commonTestsJobVacancyDTO1(jobVacancyDTO, name);
